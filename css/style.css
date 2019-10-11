@@ -1,0 +1,156 @@
+body{
+  height: 100vh;
+  width: 100vw;
+  display: grid;
+  grid-template-columns: 25% 25% 25% 25%;
+  grid-template-rows: auto;
+  grid-template-areas: 
+    "header header header header"
+    "sidebar1 main main sidebar2"
+    "footer footer footer footer";
+}
+header{
+  height: 200px;
+  width: 100%;
+  background-color: bisque;
+  grid-area: header;
+}
+
+h1{
+  line-height: 200px;
+  text-align: center;
+  font-size: 2em;
+  font-weight: bold;
+}
+
+.gameBoard{
+
+  /* display: flex; */
+  /* flex-flow: column wrap; */
+  /* justify-content: center; */
+  /* align-items: center; */
+  grid-area: main;
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+}
+.win{
+  /* height: 100px;
+  width: 100px; */
+  /* background-color: aquamarine; */
+  /* line-height: 100%; */
+  grid-area: main;
+  text-align: center;
+  justify-self: center;
+  align-self: center;
+  font-size: 500px;
+  font-weight: bolder;
+  color: #fa6479;
+}
+.row{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center ;
+  line-height:200px;
+}
+
+.left, .bottom, .top, .right{
+  /* background-color: brown; */
+  width: 120px;
+  height: 120px;
+}
+
+.left{
+  border-left: 10px solid gray;
+}
+
+.right{
+  border-right: 10px solid gray;
+}
+
+.top{
+  border-top: 10px solid gray;
+}
+
+.bottom{
+  border-bottom: 10px solid gray;
+}
+
+.players{
+  /* display: flex; */
+  /* flex-wrap: wrap; */
+  /* justify-content: space-between; */
+  /* align-items: center; */
+  justify-self: center;
+  align-self: center;
+}
+
+#playerOne, #playerTwo{
+height: 100px;
+width: 100px;
+background-color: aqua;
+}
+
+.sidebar2{
+  grid-area: sidebar2;
+  }
+
+  .sidebar1{
+    grid-area: sidebar1;
+  
+    }
+
+
+footer {
+  text-transform: uppercase;
+  background-color: #0D2C40;
+  color: white;
+  font-size: 14px;
+  letter-spacing: .08em;
+  font-weight: 500;
+  font-family: "Raleway", sans-serif;
+  padding: 5px;
+  width: 100%;
+  margin-top: 20px;
+  grid-area: footer;
+}
+.name {
+  color: #fa6479;
+  font-weight: 700;
+}
+
+.rowWin hr{
+  width: 40%;
+  height: 10px;
+  position: absolute;
+  /* bottom: 280px;
+  left: 250px;; */
+}
+.columnWin hr{
+transform: rotate(90deg);
+width: 40%;
+height: 10px;
+position: absolute;
+}
+.diagonalWin hr{
+  transform: rotate(45deg);
+  width: 50%;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 280px;
+  left: 250px;;
+}
+
+.diagonalWinReverse hr{
+  transform: rotate(-45deg);
+  width: 50%;
+  height: 10px;
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  bottom: 280px;
+  left: 235px;;
+}
