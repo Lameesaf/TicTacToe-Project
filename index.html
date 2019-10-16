@@ -5,9 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link href="https://fonts.googleapis.com/css?family=Mansalva&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Dancing+Script&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Liu+Jian+Mao+Cao&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/style.css">
-  
+
   <title>Tic Tac Toe</title>
 </head>
 
@@ -20,46 +23,53 @@
   <section class="players sidebar1">
 
     <div id="playerOne">
-      playerOne
+
+      <h2></h2>
       <p></p>
     </div>
 
   </section>
+
+  <div class="turn">
+  </div>
+
+
   <main class="gameBoard">
 
-    <div class="row">
-      <div id="top-left" class="square right bottom">1</div>
-      <div id="top-middle" class="square left bottom right">2</div>
-      <div id="top-right" class="square left bottom">3</div>
+    <div class="row r1">
+      <div id="top-left" class="square right bottom column1"></div>
+      <div id="top-middle" class="square left bottom right column2"> </div>
+      <div id="top-right" class="square left bottom column3"> </div>
     </div>
-    <div class="row">
-      <div id="middle-left" class="square top right bottom">4</div>
-      <div id="middle" class="square top left bottom right">5</div>
-      <div id="middle-right" class="square top left bottom">6</div>
+    <div class="row r2">
+      <div id="middle-left" class="square top right bottom"> </div>
+      <div id="middle" class="square top left bottom right"> </div>
+      <div id="middle-right" class="square top left bottom"> </div>
     </div>
-    <div class="row">
-      <div id="bottom-left" class="square right top">7</div>
-      <div id="bottom-middle" class="square left top right">8</div>
-      <div id="bottom-right" class="square left top">9</div>
+    <div class="row r3">
+      <div id="bottom-left" class="square right top"> </div>
+      <div id="bottom-middle" class="square left top right"></div>
+      <div id="bottom-right" class="square left top"> </div>
     </div>
   </main>
 
   <section class="players sidebar2">
 
-  
-      <div id="playerTwo">
-        playerTwo
-        <p></p>
-      </div>
-  
-    </section>
 
- 
-<script src="js/app.js"></script>
+    <div id="playerTwo">
+      <h2></h2>
+      <p></p>
+    </div>
+
+  </section>
+
+
+  <script src="js/app.js"></script>
 </body>
- <footer>
-      <p class="message">Created with <span class="name">&hearts;</span> by <span class="name">Lamees</span>
-      </p>
-  
-  </footer>
+<footer>
+  <p class="message">Created with <span class="name">&hearts;</span> by <span class="name">Lamees</span>
+  </p>
+
+</footer>
+
 </html>
