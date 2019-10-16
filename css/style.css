@@ -2,50 +2,62 @@ body{
   height: 100vh;
   width: 100vw;
   display: grid;
+  color: white;
+  background-image: url(../images/stars.gif), url(../images/background.jpg);
+  background-position: center;
+  font-family: 'Liu Jian Mao Cao', cursive;
+    background-size: cover;
   grid-template-columns: 25% 25% 25% 25%;
-  grid-template-rows: auto;
+  grid-template-rows: 25%;
   grid-template-areas: 
     "header header header header"
     "sidebar1 main main sidebar2"
+    "turn main main ."
     "footer footer footer footer";
 }
 header{
   height: 200px;
   width: 100%;
-  background-color: bisque;
   grid-area: header;
 }
-
 h1{
   line-height: 200px;
   text-align: center;
-  font-size: 2em;
+  font-size: 6em;
   font-weight: bold;
 }
+h2{
+  text-align: center;
+  font-size: 3em;
+  font-weight: bold;
+  background: rgba(250, 250, 250, 0.3);
+  font-family: 'Dancing Script', cursive;
+  text-shadow: #ffffff 1px 1px;
+  color: #021f33;
+  width: max-content;
 
+}
 .gameBoard{
-
-  /* display: flex; */
-  /* flex-flow: column wrap; */
-  /* justify-content: center; */
-  /* align-items: center; */
   grid-area: main;
   text-align: center;
   justify-self: center;
   align-self: center;
+  position: relative;
 }
 .win{
-  /* height: 100px;
-  width: 100px; */
-  /* background-color: aquamarine; */
-  /* line-height: 100%; */
   grid-area: main;
   text-align: center;
   justify-self: center;
   align-self: center;
-  font-size: 500px;
+  font-size: 300px;
   font-weight: bolder;
-  color: #fa6479;
+  color: #021f33;
+  text-shadow:2px 2px #fa6479;
+  background-image: url('../images/fireworks.gif');
+  background-repeat: no-repeat;
+  background-size: cover;
+  position: fixed;
+  font-family: 'Dancing Script', cursive;
 }
 .row{
   display: flex;
@@ -56,60 +68,66 @@ h1{
 }
 
 .left, .bottom, .top, .right{
-  /* background-color: brown; */
   width: 120px;
   height: 120px;
 }
 
 .left{
-  border-left: 10px solid gray;
+  border-left: 10px solid #021f33;
 }
 
 .right{
-  border-right: 10px solid gray;
+  border-right: 10px solid #021f33;
 }
 
 .top{
-  border-top: 10px solid gray;
+  border-top: 10px solid #021f33;
 }
 
 .bottom{
-  border-bottom: 10px solid gray;
+  border-bottom: 10px solid #021f33;
 }
 
-.players{
-  /* display: flex; */
-  /* flex-wrap: wrap; */
-  /* justify-content: space-between; */
-  /* align-items: center; */
+.players , .turn{
   justify-self: center;
-  align-self: center;
 }
+
 
 #playerOne, #playerTwo{
-height: 100px;
-width: 100px;
-background-color: aqua;
+  height: 60%;
+  width: 200px;
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-evenly;
+}
+
+.turn{
+  font-family: 'Dancing Script', cursive;
+font-size: 80px;
+background: rgba(250, 250, 250, 0.3);
+margin-left: 70px;
+text-align: center;
+grid-area: turn;
+height: max-content;
+font-weight: bolder;
+width: max-content;
+
 }
 
 .sidebar2{
   grid-area: sidebar2;
-  }
+}
 
-  .sidebar1{
-    grid-area: sidebar1;
-  
-    }
-
-
+.sidebar1{
+  grid-area: sidebar1; 
+}
 footer {
   text-transform: uppercase;
-  background-color: #0D2C40;
   color: white;
-  font-size: 14px;
+  font-size: 20px;
   letter-spacing: .08em;
   font-weight: 500;
-  font-family: "Raleway", sans-serif;
+  font-family: 'Dancing Script', cursive;
   padding: 5px;
   width: 100%;
   margin-top: 20px;
@@ -119,38 +137,186 @@ footer {
   color: #fa6479;
   font-weight: 700;
 }
-
 .rowWin hr{
-  width: 40%;
+  width: 100%;
   height: 10px;
   position: absolute;
-  /* bottom: 280px;
-  left: 250px;; */
 }
 .columnWin hr{
 transform: rotate(90deg);
-width: 40%;
+width: 100%;
 height: 10px;
 position: absolute;
+bottom: 150px;
+}
+
+.column1 hr{
+  left: -140px;
+}
+.column2 hr{
+  left: 0px;
+}
+.column3 hr{
+  left: 140px;
 }
 .diagonalWin hr{
   transform: rotate(45deg);
-  width: 50%;
+  width: 100%;
   height: 10px;
   margin: 0;
-  padding: 0;
   position: absolute;
-  bottom: 280px;
-  left: 250px;;
+  bottom: 200px;
 }
-
 .diagonalWinReverse hr{
   transform: rotate(-45deg);
-  width: 50%;
+  width: 100%;
   height: 10px;
   margin: 0;
-  padding: 0;
   position: absolute;
-  bottom: 280px;
-  left: 235px;;
+  bottom: 200px;
 }
+.square{
+  line-height: 120px;
+  font-size: 90px;
+  font-weight: bold;
+  font-family: 'Dancing Script', cursive;
+  color: white;
+}
+.x{
+color: #fa6479;
+}
+.o{
+color: white;
+text-shadow: -2px -2px #021f33;
+}
+.players p{
+  font-family: 'Mansalva', cursive;
+  text-align: center;
+  font-size: 60px;
+  font-weight: bolder;
+}
+
+@media only screen and (max-width: 850px) {
+ 
+  .left, .bottom, .top, .right{
+    width: 100px;
+    height: 100px;
+  }
+  .square{
+    line-height: 80px;
+  }
+  .columnWin hr{
+    bottom: 120px; 
+    }
+    .column1 hr{
+      left: -120px;
+    }
+    .column3 hr{
+      left: 120px;
+    }
+    .diagonalWin hr{
+      bottom: 160px;
+    }
+    .diagonalWinReverse hr{
+      bottom: 160px;
+    }
+
+    h2{
+      font-size: 30px;
+    }
+    .players{
+      align-self: flex-start;
+    }
+    #playerOne, #playerTwo .turn{
+      width: auto;
+      justify-content:center;
+      margin: 0px;
+      }
+      .players p{
+        margin-top:20px ;
+        font-size: 40px;  
+        text-shadow:2px 2px #021f33;
+      }
+
+      .turn{
+        margin: 0px;
+        font-size: 40px;  
+        text-shadow:2px 2px #021f33;
+      }
+}
+
+@media only screen and (max-width: 680px) {
+  body{
+    background-image: url('../images/resbackground.gif');
+    grid-template-rows: 20% 10% 50% 20% ;
+    grid-template-columns: 20% 30% 30% 20%;
+    grid-template-areas: 
+    "header header header header"
+    "sidebar1 sidebar1 turn sidebar2 "
+    "main main main main"
+    "footer footer footer footer";
+  } 
+
+  .turn{
+    margin: 0px;
+    justify-self: flex-start;
+    font-size: 30px;
+  }
+
+  h1{
+    font-size: 5em;
+    line-height: 100px;
+  }
+ 
+  .left, .bottom, .top, .right{
+    width: 90px;
+    height: 90px;
+  }
+  .square{
+    line-height: 70px;
+    font-size: 70px;
+  }
+  .x{
+    color: #021f33;
+    text-shadow: #ffffff 1px 1px;
+
+  }
+
+  .name {
+    color: #021f33;
+}
+
+p{
+  text-shadow:1px 1px #021f33;
+
+}
+
+  .columnWin hr{
+    bottom: 100px;
+    }
+    .column1 hr{
+      left: -100px;
+    }
+    .column3 hr{
+      left: 100px;
+    }
+    .diagonalWin hr{
+      bottom: 140px;
+    }
+    .diagonalWinReverse hr{
+      bottom: 140px;
+    }
+    .left{
+      border-left: 5px solid #fc8393;
+    }
+    .right{
+      border-right: 5px solid #fc8393;
+    }
+    .top{
+      border-top: 5px solid #fc8393;
+    }
+    .bottom{
+      border-bottom: 5px solid #fc8393;
+    }
+}
+
