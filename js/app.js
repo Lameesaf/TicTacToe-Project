@@ -1,48 +1,104 @@
-let pc;
-let gameFinish;
-let count;
+let AIplayer = '';
+let gameFinish = false;
+let count = 1;
 let choose;
-let flag = 0
+let AIturn = 0
 let playerOneStreak
-let playerTwoStreak 
+let playerTwoStreak
+const audio = document.createElement('audio')
 const playerOneScore = document.querySelector('#playerOne p')
 const playerTwoScore = document.querySelector('#playerTwo p')
 const mainEl = document.querySelector('main');
 const square = document.querySelectorAll('.square')
 const hrLine = document.createElement('hr')
-const turn = document.querySelector('.turn')
+const nextTurn = document.querySelector('.turn')
+nextTurn.innerText = 'X turn'
+nextTurn.classList = 'turn x'
 const win = document.createElement('div')
 win.setAttribute('class', 'win')
 win.style.displayArea = 'main'
 win.style.visibility = "hidden";
-document.querySelector('.r2').appendChild(win)
+document.querySelectorAll('.row')[1].appendChild(win)
 
 
+// start game function give click Listener to every div
+const startGame = function () {
+  playerName();
+  for (let i = 0; i < square.length; i++) {
+    square[i].addEventListener('click', clickSquare)
+  }
+}
+//trigger an alret to take the name of the players 
+//and to check if the second player is a computer or not
 const playerName = function () {
-  // const player1 = prompt("Please enter your name", "player1");
+  const player1 = prompt("Please enter your name", "player1");
 
-  // if (player1 != null) {
-  // document.querySelector('h2').innerText = player1 + ' score'
-  // } else {
-  document.querySelector('h2').innerText = 'Player one score'
-  // }
+  if (player1 != null) {
+    document.querySelector('h2').innerText = player1 + ' score'
+  } else {
+    document.querySelector('h2').innerText = 'Player1 score'
+  }
 
-  // const player2 = prompt("Please enter your name or com for computer", "com");
-  // if (player2 === 'com') {
-  document.querySelectorAll('h2')[1].innerText = 'AI score'
-  pc = 'com';
-  // }
-  // if (player2 != 'com' && player2 != null) {
-  // document.querySelectorAll('h2')[1].innerText = player2 + ' score'
-  // }
+  const player2 = prompt("Please enter your name or com for computer", "com");
+  if (player2 === 'com') {
+    document.querySelectorAll('h2')[1].innerText = 'AI score'
+    AIplayer = 'com';
+  }
+  if (player2 != 'com' && player2 != null) {
+    document.querySelectorAll('h2')[1].innerText = player2 + ' score'
+  }
 }
 
+//triggered when one of the player clicked on a box
+//check who is turn now and make the move
+const clickSquare = function () {
+  
+  if (AIplayer != 'com') {
+    if (count % 2 != 0) {
+      this.innerText = 'x'
+      this.classList += ' x'
+      nextTurn.innerText = 'O turn'
+      nextTurn.classList = 'turn o'
+      this.removeEventListener('click', clickSquare)
+    } else {
+      this.classList += ' o'
+      this.innerText = 'o'
+      nextTurn.innerText = 'X turn'
+      nextTurn.classList = 'turn x'
+      this.removeEventListener('click', clickSquare)
+    }
+    checkWinner()
+  } else {
+    //if it's not the AI turn
+    if (AIturn === 0) {
+      this.innerText = 'x'
+      this.classList += ' x'
+      this.removeEventListener('click', clickSquare)
+      AIturn = 1
+      //it's a tie no need to go to the AI function
+      if (count === 9) {
+        checkWinner()
+      } else {
+        checkWinner()
+        //if first player win don't go to the AI function 
+        if (gameFinish === false) {
+          nextTurn.innerText = 'AI turn'
+          nextTurn.classList = 'turn o'
+          AI()
+        }
+      }
+    }
+  }
+}
 
+//ganrate a random number for the AI to play
 const AI = function () {
   choose = Math.ceil(Math.random() * 8)
   AImove(square[choose])
 }
 
+// check the div the AI function choose if it's empty play there 
+//if there is an X go back to find another empty div 
 function AImove(choosenSquare) {
 
   if (choosenSquare.innerText === 'x' || choosenSquare.innerText === 'o') {
@@ -51,60 +107,18 @@ function AImove(choosenSquare) {
     setTimeout(() => {
       choosenSquare.classList += ' o'
       choosenSquare.innerText = 'o'
-  turn.innerText= 'X turn'
-  turn.classList = 'turn x'
-
+      nextTurn.innerText = 'X turn'
+      nextTurn.classList = 'turn x'
       choosenSquare.removeEventListener('click', clickSquare);
       checkWinner()
-      flag = 0
+      AIturn = 0
     }, 1000)
   }
 }
-
-
-const clickSquare = function () {
-
-
-
-  if (pc != 'com') {
-    if (count % 2 != 0) {
-      this.innerText = 'x'
-      this.classList += ' x'
-      turn.innerText= 'O turn'
-      turn.classList = 'turn o'
-      this.removeEventListener('click', clickSquare)
-    } else {
-      this.classList += ' o'
-      this.innerText = 'o'
-      turn.innerText= 'X turn'
-      turn.classList = 'turn x'
-
-
-      this.removeEventListener('click', clickSquare)
-    }
-    checkWinner()
-  } else {
-    if (flag === 0) {
-      this.innerText = 'x'
-      this.classList += ' x'
-      this.removeEventListener('click', clickSquare)
-      flag = 1
-      if (count === 9) {
-        checkWinner()
-      } else {
-        checkWinner()
-        if (gameFinish === false) {
-          turn.innerText= 'AI turn'
-      turn.classList = 'turn o'
-
-          AI()
-        }
-      }
-    }
-  }
-}
-
+// check if there a winner by checking the rows and columns and diagonals or if its a tie
 const checkWinner = function () {
+
+  //check the rows
   for (let i = 0; i < square.length; i = i + 3) {
     let c = 1
     for (let j = i + 1; j < (i + 3); j++) {
@@ -115,7 +129,7 @@ const checkWinner = function () {
     if (c === 3) {
       mainEl.classList += ' rowWin'
       square[i].parentElement.appendChild(hrLine)
-  turn.style.visibility= 'hidden'
+      nextTurn.style.visibility = 'hidden'
 
       for (let i = 0; i < square.length; i++) {
         square[i].removeEventListener('click', clickSquare)
@@ -126,7 +140,7 @@ const checkWinner = function () {
       }, 1000)
     }
   }
-
+//check the columns
   for (let i = 0; i < 3; i++) {
     let c = 1
     for (let j = i + 3; j < square.length; j = j + 3) {
@@ -138,7 +152,7 @@ const checkWinner = function () {
         mainEl.classList += ' columnWin'
         console.log(i)
         square[i].appendChild(hrLine)
-  turn.style.visibility= 'hidden'
+        nextTurn.style.visibility = 'hidden'
         console.log('win c')
         for (let i = 0; i < square.length; i++) {
           square[i].removeEventListener('click', clickSquare)
@@ -151,17 +165,17 @@ const checkWinner = function () {
       }
     }
   }
-
+//check diagonals
   if ((square[0].innerText === square[4].innerText && square[0].innerText === square[8].innerText ||
     square[2].innerText === square[4].innerText && square[2].innerText === square[6].innerText) && square[4].innerText != '') {
-    if (square[0].innerText === square[4].innerText && square[0].innerText===square[8].innerText) {
+    if (square[0].innerText === square[4].innerText && square[0].innerText === square[8].innerText) {
       mainEl.classList += ' diagonalWin'
       mainEl.appendChild(hrLine)
-      turn.style.visibility= 'hidden'
+      nextTurn.style.visibility = 'hidden'
     } else {
       mainEl.classList += ' diagonalWinReverse'
       mainEl.appendChild(hrLine)
-  turn.style.visibility= 'hidden'
+      nextTurn.style.visibility = 'hidden'
     }
     console.log('win ')
     for (let i = 0; i < square.length; i++) {
@@ -176,7 +190,7 @@ const checkWinner = function () {
       if (gameFinish === false) {
         ++count;
       }
-  turn.style.visibility= 'hidden'
+      nextTurn.style.visibility = 'hidden'
 
       winner()
     }
@@ -185,35 +199,48 @@ const checkWinner = function () {
     ++count;
   }
 }
-
+// announce the winner by hiding the game board and showing the winner 
+//and add the score and audio to the winner
 const winner = function () {
   if (count === 10) {
     win.innerText = 'Tie'
+    audio.setAttribute('src', 'audio/tie.mp3')
+    //so the audio will not change
+    count = count-1
   } else {
     if (count % 2 != 0) {
       playerOneScore.innerText = 'win';
       playerTwoScore.innerText = 'lose';
-      console.log(typeof(playerOneStreak))
-      playerOneStreak=playerOneStreak+1;
+      playerOneStreak = playerOneStreak + 1;
       win.innerText = 'X wins';
-  console.log(playerOneStreak)
       localStorage.setItem('playerOneStreak', playerOneStreak);
-
     } else {
       playerTwoScore.innerText = 'win';
       playerOneScore.innerText = 'lose';
       win.innerText = 'O wins'
       ++playerTwoStreak;
-      localStorage.setItem('playerTwoStreak', playerTwoStreak);
     }
+    audio.setAttribute('src', 'audio/win.mp3')
   }
-  console.log(playerOneStreak)
+
+  if(AIplayer = 'com' && count %2===0){
+    audio.setAttribute('src', 'audio/AIwin.wav')
+  }
+  localStorage.setItem('playerTwoStreak', playerTwoStreak);
   setTimeout(() => {
     playerOneScore.innerText = localStorage.getItem('playerOneStreak');
     playerTwoScore.innerText = localStorage.getItem('playerTwoStreak');
   }, 3000)
+  
   mainEl.style.visibility = "hidden"
   win.style.visibility = "visible"
+  win.appendChild(audio)
+  audio.play();
+  reset()
+}
+
+//show the game board again after clear it and reset all values
+const reset = function () {
 
   for (let i = 0; i < square.length; i++) {
     square[i].innerText = ''
@@ -224,44 +251,37 @@ const winner = function () {
     hrLine.parentElement.removeChild(hrLine)
   }
   mainEl.setAttribute('class', 'gameBoard')
-
   setTimeout(() => {
     win.style.visibility = "hidden"
+    audio.pause();
     mainEl.style.visibility = "visible"
-  turn.style.visibility= 'visible'
-
+    nextTurn.style.visibility = 'visible'
     startGame()
   }, 3000)
-}
-
-const startGame = function () {
-console.log(localStorage.getItem('playerOneStreak'))
 
   count = 1;
-  flag = 0
-  pc = ''
+  AIturn = 0
+  AIplayer = ''
   gameFinish = false;
-  playerName();
-  turn.innerText= 'X turn'
-  turn.classList = 'turn x'
-  for (let i = 0; i < square.length; i++) {
-    square[i].addEventListener('click', clickSquare)
-  }
+  nextTurn.innerText = 'X turn'
+  nextTurn.classList = 'turn x'
 }
 
+
+// check if the local storge has a previous values or start from 0
 if (localStorage.getItem('playerOneStreak')) {
-  console.log('hi')
-  console.log(localStorage.getItem('playerOneStreak'));
-  playerOneStreak  = Number(localStorage.getItem('playerOneStreak'));
+  playerOneStreak = Number(localStorage.getItem('playerOneStreak'));
   playerTwoStreak = Number(localStorage.getItem('playerTwoStreak'));
   playerOneScore.innerText = localStorage.getItem('playerOneStreak');
   playerTwoScore.innerText = localStorage.getItem('playerTwoStreak');
 } else {
-playerOneStreak = 0
-playerTwoStreak = 0
+  playerOneStreak = 0
+  playerTwoStreak = 0
   playerOneScore.innerText = playerOneStreak;
   playerTwoScore.innerText = playerTwoStreak;
   localStorage.setItem('playerOneStreak', playerOneStreak);
   localStorage.setItem('playerTwoStreak', playerTwoStreak);
 }
+
+//cal the function to start the game
 startGame();
