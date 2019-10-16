@@ -320,3 +320,23 @@ p{
     }
 }
 
+@media only screen and (max-width: 450px){
+
+.win{
+  font-size: 150px;
+}
+
+  .turn, h2{
+    font-size: 20px;
+  }
+
+  .players p{
+    font-size: 20px;
+  }
+
+  #playerTwo p{
+    text-align: left;
+    margin-left: 26px;
+  }
+}
+
