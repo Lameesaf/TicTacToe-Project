@@ -7,8 +7,8 @@
 * JS
 * Local Storge
 
-## [wireframes](https://www.figma.com/file/MDVRriZxH3IUw9P5T0cZ1y/tictactoe?node-id=0%3A1)
-## [Responsive wireframes](https://www.figma.com/file/MDVRriZxH3IUw9P5T0cZ1y/tictactoe?node-id=3%3A39)
+## [wireframes](https://www.figma.com/proto/MDVRriZxH3IUw9P5T0cZ1y/tictactoe?node-id=1%3A4&scaling=min-zoom)
+## [Responsive wireframes](https://www.figma.com/proto/MDVRriZxH3IUw9P5T0cZ1y/tictactoe?node-id=3%3A76&scaling=min-zoom)
 
 ## User Stories
 * As a user, I should be abel to keep the score even if I refresh the page
