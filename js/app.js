@@ -258,6 +258,7 @@ const reset = function () {
   setTimeout(() => {
     win.style.visibility = "hidden";
     audio.pause();
+    win.innerText = ' ';
     mainEl.style.visibility = "visible";
     nextTurn.style.visibility = 'visible';
     startGame();
